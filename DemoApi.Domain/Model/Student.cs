@@ -10,5 +10,5 @@ public class Student: AuditableEntity
     public required string MotherName { get; set; }
     public required string Address { get; set; }
     public required string Phone { get; set; }
-    public required DateOnly DateOfBirth { get; set; }   
+    public required DateTime DateOfBirth { get; set; }   
 }
