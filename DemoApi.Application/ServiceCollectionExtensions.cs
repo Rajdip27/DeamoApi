@@ -1,4 +1,7 @@
-﻿using DemoApi.Application.Repositories.Base;
+﻿using DemoApi.Application.Behavior;
+using DemoApi.Application.Repositories.Base;
+using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,6 +16,16 @@ public static class ServiceCollectionExtensions
        .AddClasses(x => x.AssignableTo(typeof(IBaseRepository<,,>)))
        .AsSelfWithInterfaces()
        .WithScopedLifetime());
+
+        services.AddValidatorsFromAssembly(typeof(IApplication).Assembly);
+
+        services.AddMediatR(x =>
+        {
+            x.RegisterServicesFromAssemblies(typeof(IApplication).Assembly);
+            x.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            x.AddBehavior(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+
+        });
 
         services.AddAutoMapper(x => {
             x.AddMaps(typeof(IApplication).Assembly);
