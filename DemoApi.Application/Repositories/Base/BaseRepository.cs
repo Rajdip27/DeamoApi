@@ -3,6 +3,7 @@ using DemoApi.Domain.Extensions;
 using DemoApi.Domain.Extensions.Dropdown;
 using DemoApi.Domain.Extensions.Pagging;
 using DemoApi.Domain.Model.BaseEntities;
+using DemoApi.Infrastructure.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -13,11 +14,11 @@ public class BaseRepository<TEntity, TModel, T> : IBaseRepository<TEntity, TMode
      where T : IEquatable<T>
 {
     protected readonly IMapper _mapper;
-    private readonly DbContext _context;
+    private readonly ApplicationDbContext _context;
 
     public DbSet<TEntity> DbSet { get; set; }
 
-    public BaseRepository(IMapper mapper, DbContext context)
+    public BaseRepository(IMapper mapper, ApplicationDbContext context)
     {
         _mapper = mapper;
         _context = context;
