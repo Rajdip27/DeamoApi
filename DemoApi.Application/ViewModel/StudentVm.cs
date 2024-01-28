@@ -1,4 +1,8 @@
-﻿namespace DemoApi.Application.ViewModel;
+﻿using AutoMapper;
+using DemoApi.Domain.Model;
+
+namespace DemoApi.Application.ViewModel;
+[AutoMap(typeof(Student),ReverseMap =true)]
 public record StudentVm(
     long Id,
     long StudentId,
