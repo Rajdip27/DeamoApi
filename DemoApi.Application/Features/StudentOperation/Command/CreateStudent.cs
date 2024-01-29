@@ -14,9 +14,9 @@ public class CreateStudentHandler : IRequestHandler<CreateStudent, CommandResult
 {
     private readonly IStudentRepository _studentRepository;
     private readonly IMapper _mapper;
-    private readonly IValidator<StudentVm> _validator;
+    private readonly IValidator<CreateStudent> _validator;
 
-    public CreateStudentHandler(IStudentRepository studentRepository, IMapper mapper, IValidator<StudentVm> validator)
+    public CreateStudentHandler(IStudentRepository studentRepository, IMapper mapper, IValidator<CreateStudent> validator)
     {
         _studentRepository = studentRepository;
         _mapper = mapper;
@@ -25,7 +25,7 @@ public class CreateStudentHandler : IRequestHandler<CreateStudent, CommandResult
 
     public async Task<CommandResult<StudentVm>> Handle(CreateStudent request, CancellationToken cancellationToken)
     {
-        var validationResult = await _validator.ValidateAsync(request.StudentVm, cancellationToken);
+        var validationResult = await _validator.ValidateAsync(request, cancellationToken);
         if (validationResult != null)
         {
             var result = _mapper.Map<StudentVm>(await _studentRepository
@@ -42,16 +42,16 @@ public class CreateStudentHandler : IRequestHandler<CreateStudent, CommandResult
 }
 
 
-public class CreateStudentValidator : AbstractValidator<StudentVm>
+public class CreateStudentValidator : AbstractValidator<CreateStudent>
 {
     public CreateStudentValidator()
     {
-        RuleFor(x => x.Name).NotNull().WithMessage("'{PropertyName}' information is required.");
-        RuleFor(x => x.FatherName).NotNull().WithMessage("'{PropertyName}' information is required.");
-        RuleFor(x => x.MotherName).NotNull().WithMessage("'{PropertyName}' information is required.");
-        RuleFor(x => x.Email).NotNull().WithMessage("'{PropertyName}' information is required.");
-        RuleFor(x => x.Phone).NotNull().WithMessage("'{PropertyName}' information is required.");
-        RuleFor(x => x.Address).NotNull().WithMessage("'{PropertyName}' information is required.");
+        RuleFor(x => x.StudentVm.Name).NotNull().WithMessage("'{PropertyName}' information is required.");
+        RuleFor(x => x.StudentVm.FatherName).NotNull().WithMessage("'{PropertyName}' information is required.");
+        RuleFor(x => x.StudentVm.MotherName).NotNull().WithMessage("'{PropertyName}' information is required.");
+        RuleFor(x => x.StudentVm.Email).NotNull().WithMessage("'{PropertyName}' information is required.");
+        RuleFor(x => x.StudentVm.Phone).NotNull().WithMessage("'{PropertyName}' information is required.");
+        RuleFor(x => x.StudentVm.Address).NotNull().WithMessage("'{PropertyName}' information is required.");
     }
 
 }

@@ -19,5 +19,12 @@ public class StudentController : ApiControllerBase
     [HttpPut("{id:long}")]
     public async Task<ActionResult<StudentVm>>UpdateStudent( long id, [FromBody] StudentVm model) =>
         await HandelCommandAsync(new UpdateStudent(id,model));
+
+    [HttpDelete("{id:long}")]
+    public async Task<ActionResult<StudentVm>>Delete(long id)=>
+        await HandelCommandAsync(new DeleteStudent(id));
+    
+
+    
     
 }
