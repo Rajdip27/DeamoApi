@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\CountryOperation\Query\" />
+    <Folder Include="Features\CountryOperation\NewFolder\" />
   </ItemGroup>
 
 </Project>
