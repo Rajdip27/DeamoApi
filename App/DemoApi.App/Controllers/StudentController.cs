@@ -23,6 +23,10 @@ public class StudentController : ApiControllerBase
     [HttpDelete("{id:long}")]
     public async Task<ActionResult<StudentVm>>Delete(long id)=>
         await HandelCommandAsync(new DeleteStudent(id));
+    [HttpGet("{id:long}")]
+    public async Task<ActionResult<StudentVm>> GetStudentById(long id) =>
+        await HandelQueryAsync(new GetSingleStudentById(id));
+
     
 
     
