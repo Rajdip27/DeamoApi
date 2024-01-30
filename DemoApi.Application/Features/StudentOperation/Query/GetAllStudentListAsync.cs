@@ -25,7 +25,7 @@ public class GetAllStudentListAsyncHandler : IRequestHandler<GetAllStudentListAs
     {
       var result = await _studentRepository.GetPageAsync(request.PageIndex, request.PageSize,
       p => (string.IsNullOrEmpty(request.SearchText) | p.Name.Contains(request.SearchText)),
-      o => o.OrderBy(o => o.Id),
+      o => o.OrderBy(o => o.Name),
       se => se);
 
         var data = result.ToPagingModel<Student, StudentVm>(_mapper);

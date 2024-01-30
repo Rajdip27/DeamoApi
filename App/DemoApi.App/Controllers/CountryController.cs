@@ -1,5 +1,6 @@
 ﻿using DemoApi.App.Controllers.Base;
 using DemoApi.Application.Features.CountryOperation.Command;
+using DemoApi.Application.Features.CountryOperation.Query;
 using DemoApi.Application.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,7 +19,11 @@ public class CountryController : ApiControllerBase
 
     [HttpDelete("{id:long}")]
     public async Task<ActionResult<CountryVm>>DeleteCountry(long id)=>
-        await HandelCommandAsync(new  DeleteCountry(id));   
+        await HandelCommandAsync(new  DeleteCountry(id));
+
+    [HttpGet]
+    public async Task<ActionResult<CountryVm>> GetAllCountry(int pageSize = 10, int pageIndex = 0, string searchText = null) =>
+        await HandelQueryAsync(new GetAllCountryListAsync(pageSize, pageIndex, searchText));
 
     
 

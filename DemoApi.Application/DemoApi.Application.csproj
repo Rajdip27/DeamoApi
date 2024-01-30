@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -21,10 +21,6 @@
   <ItemGroup>
     <ProjectReference Include="..\DemoApi.Domain\DemoApi.Domain.csproj" />
     <ProjectReference Include="..\DemoApi.Infrastructure\DemoApi.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\CountryOperation\Query\" />
   </ItemGroup>
 
 </Project>
