@@ -12,6 +12,11 @@ public class CountryController : ApiControllerBase
     public async Task<ActionResult<CountryVm>> CreateCountry([FromBody] CountryVm countryVm) =>
         await  HandelCommandAsync(new CreateCountry(countryVm));
 
+    [HttpPut]
+    public async Task<ActionResult<CountryVm>> UpdateCountry(long id , [FromBody],CountryVm model)=>
+        await HandelCommandAsync(new UpdateCountry(id, model));
+    
+
 
 
 }
