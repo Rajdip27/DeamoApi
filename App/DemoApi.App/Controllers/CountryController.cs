@@ -5,8 +5,6 @@ using DemoApi.Application.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DemoApi.App.Controllers;
-
-
 public class CountryController : ApiControllerBase 
 {
     [HttpPost]
@@ -25,8 +23,10 @@ public class CountryController : ApiControllerBase
     public async Task<ActionResult<CountryVm>> GetAllCountry(int pageSize = 10, int pageIndex = 0, string searchText = null) =>
         await HandelQueryAsync(new GetAllCountryListAsync(pageSize, pageIndex, searchText));
 
-    
 
+    [HttpGet("{id:long}")]
+    public async Task<ActionResult<CountryVm>> GetCountryById(long id) =>
+        await HandelQueryAsync(new GetSingleCountryById(id));
 
 
 }
