@@ -28,6 +28,11 @@ public class CountryController : ApiControllerBase
     public async Task<ActionResult<CountryVm>> GetCountryById(long id) =>
         await HandelQueryAsync(new GetSingleCountryById(id));
 
+    [HttpGet("dropdown")]
+    public async Task<ActionResult<CountryVm>> GetCountryDropdownAsync(string SearchText=null!, int Size=15) =>
+        await HandelQueryAsync(new GetCountryDropdownAsync(SearchText, Size));
+   
+
 
 }
 
