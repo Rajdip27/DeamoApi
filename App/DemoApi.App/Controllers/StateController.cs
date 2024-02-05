@@ -14,7 +14,10 @@ public class StateController : ApiControllerBase
 
     [HttpPut("{id:long}")]
     public async Task<ActionResult<StateVm>>UpdateState(long id, StateVm model)=>
-        await HandelCommandAsync(new  UpdateState(id, model));  
+        await HandelCommandAsync(new  UpdateState(id, model));
+    [HttpDelete("{id:long}")]
+    public async Task<ActionResult> DeleteState(long id) =>
+        await HandelCommandAsync(new DeleteState(id));
    
    
 }
