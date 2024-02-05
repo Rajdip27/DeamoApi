@@ -8,7 +8,13 @@ namespace DemoApi.App.Controllers;
 
 public class StateController : ApiControllerBase
 {
+    [HttpPost]
     public async Task<ActionResult<StateVm>> CreatState(StateVm model)=>
         await HandelCommandAsync(new CreateState(model));
+
+    [HttpPut("{id:long}")]
+    public async Task<ActionResult<StateVm>>UpdateState(long id, StateVm model)=>
+        await HandelCommandAsync(new  UpdateState(id, model));  
+   
    
 }
