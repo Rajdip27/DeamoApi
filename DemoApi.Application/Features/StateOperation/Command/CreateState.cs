@@ -2,6 +2,7 @@
 using DemoApi.Application.Repositories;
 using DemoApi.Application.ViewModel;
 using DemoApi.Domain.Extensions.Results;
+using DemoApi.Domain.Model;
 using FluentValidation;
 using MediatR;
 
@@ -21,9 +22,21 @@ public class CreateStateHandler : IRequestHandler<CreateState, CommandResult<Sta
 		_validator = validator;
 	}
 
-	public Task<CommandResult<StateVm>> Handle(CreateState request, CancellationToken cancellationToken)
+	public async Task<CommandResult<StateVm>> Handle(CreateState request, CancellationToken cancellationToken)
 	{
-		throw new NotImplementedException();
+		var result = await _validator.ValidateAsync(request, cancellationToken);
+		if(result is not null)
+		{
+			var data =await _stateRepository.InsertAsync(_mapper.Map<State>(result));
+			return data switch 
+			{ 
+				null=>new CommandResult<StateVm>(default,CommandResultTypeEnum.UnprocessableEntity),
+				_=>new CommandResult<StateVm>(data,CommandResultTypeEnum.Success)
+			
+			};
+
+		}
+		throw new ValidationException(result.Errors);
 	}
 }
 public class CreateStateHandlerValidation : AbstractValidator<CreateState> {
