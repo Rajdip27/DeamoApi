@@ -23,4 +23,8 @@
     <ProjectReference Include="..\DemoApi.Infrastructure\DemoApi.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
+  </ItemGroup>
+
 </Project>

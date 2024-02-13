@@ -20,7 +20,7 @@ public class GetCountryDropdownAsyncHandler : IRequestHandler<GetCountryDropdown
     {
         var result = await _countryRepository.GetDropdownAsync(
           p => (string.IsNullOrEmpty(request.SearchText) | p.Name.Contains(request.SearchText)),
-          o => o.OrderBy(ob => ob.Name),
+          o => o.OrderBy(ob => ob.Id),
           se => new CountryVm { Id = se.Id, Name = se.Name },
           request.Size);
         return result switch
